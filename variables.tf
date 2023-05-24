@@ -19,8 +19,9 @@ variable "firewall-ports" {
   default = ["80", "8080", "1000-2000", "22"]
 }
 
-
-
+variable "target_envioroment" {
+  default = "DEV"
+}
 
 variable "zone" {
   type    = string
@@ -37,6 +38,7 @@ variable "private_google_access" {
   default = true
 }
 
+
 variable "environment_machine_type" {
   type = map(string)
   default = {
@@ -47,10 +49,6 @@ variable "environment_machine_type" {
   }
 }
 
-variable "environment_list" {
-  type    = list(string)
-  default = ["DEV", "QA", "STAGE", "PROD"]
-}
 variable "environment_instance_setttings" {
   type = map(object({ machine_type = string, labels = map(string) }))
   default = {
@@ -78,8 +76,25 @@ variable "environment_instance_setttings" {
         environment = "prod"
       }
     }
-
   }
+}
 
+variable "environment_list" {
+  type    = list(string)
+  default = ["DEV", "QA", "STAGE", "PROD"]
+}
 
+variable "environment_map" {
+  type = map(string)
+  default = {
+    "DEV"   = "dev",
+    "QA"    = "qa",
+    "STAGE" = "stage",
+    "PROD"  = "prod"
+  }
+}
+
+variable "compute-source-tags" {
+    type = list
+    default = ["web"] 
 }
